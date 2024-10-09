@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class AbilityRunner : MonoBehaviour
 {
-    private IAbility _currentAbility = new FireAbility();
+    private IAbility _currentAbility = 
+        new DelayDecorator(new FireAbility());
 
     public void UseAbility() 
-        => _currentAbility.Use(gameObject);
+        => _currentAbility?.Use(gameObject);
     public void ChangeAbility(IAbility ability) 
-        => _currentAbility = ability;
+        => _currentAbility = new DelayDecorator(ability);
 }
